@@ -40,7 +40,7 @@ const cars = [
         liked: false,
         slug: { current: "car-2" },
         rating: 4.5,
-        image: "/default.png?height=200&width=400",
+        image: "/c4.png?height=200&width=400",
     },
     { 
         _id : "3",
@@ -74,7 +74,7 @@ const cars = [
         liked: false,
         slug: { current: "car-4" },
         rating: 4.5,
-        image: "/default.png?height=200&width=400",
+        image: "/c2.png?height=200&width=400",
     },
     
     { 
