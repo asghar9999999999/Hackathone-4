@@ -649,7 +649,7 @@ import CarDetail from "./components/CarDetail"; // Child component import karein
 
 export default function CarDetailPage() {
     return (
-        <Suspense fallback={<div>Car details load ho rahe hain...</div>}>
+        <Suspense fallback={<div>Car details loading!</div>}>
             <CarDetail /> {/* Yahan original component ko use karein */}
         </Suspense>
     );

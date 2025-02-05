@@ -18,13 +18,15 @@ const popularCars: Car[] = [
         fuelCapacity: "90L",
         transmission: "Manual",
         seatingCapacity: "2",
-        pricePerDay: "99.00",
+        pricePerDay: 99.00,
         originalPrice: "120.00",
         tags: ["Luxury", "High Performance"],
         image: "/c6.png?height=200&width=400",
         liked: true,
         slug: { current: "mg-zs" },
-        rating: 0
+        rating: 0,
+        quantity: 0,
+        inventory: 0
     },
     {
         _id: "2",
@@ -35,13 +37,15 @@ const popularCars: Car[] = [
         fuelCapacity: "90L",
         transmission: "Auto",
         seatingCapacity: "4",
-        pricePerDay: "80.00",
+        pricePerDay: 80.00,
         originalPrice: "100.00",
         tags: ["Fast", "Iconic"],
         image: "/c3.png?height=200&width=400",
         liked: false,
         slug: { current: "mg-zs" },
-        rating: 0
+        rating: 0,
+        quantity: 0,
+        inventory: 0
     },
     {
         _id: "3",
@@ -52,13 +56,15 @@ const popularCars: Car[] = [
         fuelCapacity: "100L",
         transmission: "Auto",
         seatingCapacity: "5",
-        pricePerDay: "96.00",
+        pricePerDay: 96.00,
         originalPrice: "120.00",
         tags: ["Luxury", "Comfort"],
         image: "/c4.png?height=200&width=400",
         liked: true,
         slug: { current: "mg-zs" },
-        rating: 0
+        rating: 0,
+        quantity: 0,
+        inventory: 0
     },
     {
         _id: "4",
@@ -69,13 +75,15 @@ const popularCars: Car[] = [
         fuelCapacity: "80L",
         transmission: "Manual",
         seatingCapacity: "4",
-        pricePerDay: "85.00",
+        pricePerDay: 85.00,
         originalPrice: "110.00",
         tags: ["Classic", "Performance"],
         image: "/c5.png?height=200&width=400",
         liked: false,
         slug: { current: "mg-zs" },
-        rating: 0
+        rating: 0,
+        quantity: 0,
+        inventory: 0
     },
 ]
 
@@ -89,13 +97,15 @@ const recommendedCars: Car[] = [
         fuelCapacity: "70L",
         transmission: "Auto",
         seatingCapacity: "7",
-        pricePerDay: "72.00",
+        pricePerDay: 72.00,
         originalPrice: "80.00",
         tags: ["Family", "Efficient"],
         image: "/c6.png?height=200&width=400",
         liked: false,
         slug: { current: "mg-zs" },
-        rating: 0
+        rating: 0,
+        quantity: 0,
+        inventory: 0
     },
     {
         _id: "6",
@@ -106,13 +116,15 @@ const recommendedCars: Car[] = [
         fuelCapacity: "80L",
         transmission: "Auto",
         seatingCapacity: "5",
-        pricePerDay: "80.00",
+        pricePerDay: 80.00,
         originalPrice: "100.00",
         tags: ["Reliable", "Spacious"],
         image: "/c7.png?height=200&width=400",
         liked: true,
         slug: { current: "mg-zs" },
-        rating: 0
+        rating: 0,
+        quantity: 0,
+        inventory: 0
     },
     {
         _id: "7",
@@ -123,13 +135,15 @@ const recommendedCars: Car[] = [
         fuelCapacity: "60L",
         transmission: "Manual",
         seatingCapacity: "5",
-        pricePerDay: "74.00",
+        pricePerDay: 74.00,
         originalPrice: "90.00",
         tags: ["Compact", "Efficient"],
         image: "/c1.png?height=200&width=400",
         liked: false,
         slug: { current: "mg-zs" },
-        rating: 0
+        rating: 0,
+        quantity: 0,
+        inventory: 0
     },
     {
         _id: "8",
@@ -140,13 +154,15 @@ const recommendedCars: Car[] = [
         fuelCapacity: "75L",
         transmission: "Auto",
         seatingCapacity: "5",
-        pricePerDay: "80.00",
+        pricePerDay: 80.00,
         originalPrice: "100.00",
         tags: ["Modern", "Tech"],
         image: "/c2.png?height=200&width=400",
         liked: true,
         slug: { current: "mg-zs" },
-        rating: 0
+        rating: 0,
+        quantity: 0,
+        inventory: 0
     },
 ]
 

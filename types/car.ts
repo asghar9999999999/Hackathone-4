@@ -1,5 +1,6 @@
 
 export interface Car {
+    quantity: number
     _id : string
     name: string
     brand: string
@@ -8,12 +9,13 @@ export interface Car {
     fuelCapacity: string
     transmission: string
     seatingCapacity: string
-    pricePerDay: string
+    pricePerDay: number
     originalPrice: string
     tags: string[]
     image: string
     liked: boolean
     rating: number
+    inventory: number
     slug: {
         current: string;
     };

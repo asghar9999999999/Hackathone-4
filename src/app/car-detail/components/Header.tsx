@@ -1,56 +1,53 @@
-"use client";
-import { Search, Settings, Heart, ShoppingCart } from "lucide-react";
-import { Avatar } from "@/components/ui/avatar";
-import Image from "next/image";
+"use client"
 import Link from "next/link";
+import { Bell, Heart, Search, Settings, ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Image from "next/image";
 import { useState } from "react";
+import car from "./car";
 
-export const Header = () => {
-    // State for cart item count
-    const [cartCount] = useState(0);
+export default function Header() {
+    const [cartItems, setCartItems] = useState<{ name: string }[]>([]);
+    const [isCartOpen, setIsCartOpen] = useState(false);
+
+    // Function to add item to cart
+    const addToCart = (item: { name: string; }) => {
+        setCartItems((prevItems) => [...prevItems, item]);
+    };
 
     return (
-        <header className="bg-white py-4 px-6 flex items-center justify-between border-b">
-            <div className="flex items-center gap-8">
-                <Link href="/" className="text-2xl font-bold text-primary text-morent-blue">
+        <header className="sticky top-0 z-50 w-full border-b bg-background">
+            <div className="container flex h-16 items-center justify-between px-4">
+                <Link href="/" className="text-2xl font-bold text-primary">
                     MORENT
                 </Link>
-                <div className="relative hidden md:block">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-morent-gray w-5 h-5" />
-                    <input
-                        type="text"
+
+                {/* Search */}
+                <div className="hidden md:block relative">
+                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input
+                        type="search"
                         placeholder="Search something here"
-                        className="pl-10 pr-4 py-2 bg-morent-background rounded-lg w-[400px] focus:outline-none focus:ring-2 focus:ring-morent-blue"
+                        className="w-[400px] pl-9 pr-4"
                     />
                 </div>
-            </div>
-            <div className="flex items-center gap-4">
-                <button className="p-2 hover:bg-morent-background rounded-full">
-                    <Heart className="w-6 h-6 text-morent-gray" />
-                </button>
-                <button className="p-2 hover:bg-morent-background rounded-full relative">
-                    <Link href="/cart">
-                        <ShoppingCart className="w-6 h-6 text-morent-gray" />
-                    </Link>
-                    {/* Cart item count */}
-                    {cartCount > 0 && (
-                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                            {cartCount}
-                        </span>
-                    )}
-                </button>
-                <button className="p-2 hover:bg-morent-background rounded-full">
-                    <Settings className="w-6 h-6 text-morent-gray" />
-                </button>
-                <Avatar className="w-10 h-10">
-                    <Image
-                        src="/Profil.png?height=2000&width=2000"
-                        alt="Sports car"
-                        width={2000}
-                        height={2000}
-                    />
-                </Avatar>
+                <div className="flex items-center gap-2">
+                    <Link href= "/cart"> <Button variant="ghost" size="icon"><Heart className="h-5 w-5" /></Button></Link> 
+                    <Button variant="ghost" size="icon"><Bell className="h-5 w-5" /></Button>
+                    <Button variant="ghost" size="icon"><Settings className="h-5 w-5" /></Button>
+
+    
+                    <Button variant="ghost" size="icon" className="rounded-full">
+                        <Image
+                            src="/Profil.png?height=2000&width=2000"
+                            alt="Sports car"
+                            width={2000}
+                            height={2000}
+                        />
+                    </Button>
+                </div>
             </div>
         </header>
     );
-};
+}

@@ -57,6 +57,12 @@ export const car = {
             description: 'Original price before discount (if applicable)',
         },
         {
+            name: 'inventory',
+            type: 'number',
+            title: 'Inventory',
+            description: 'Number of cars available for rent',
+        },
+        {
             name: 'tags',
             type: 'array',
             title: 'Tags',
@@ -84,7 +90,7 @@ export const car = {
             }
         },
 
-        
+   
 
     ],
 };
