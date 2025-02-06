@@ -265,8 +265,16 @@ import { useCart } from "./CartContext";
 import { Header } from "../category/components/Header";
 import Footer from "../car-detail/components/footer"
 import Swal from "sweetalert2";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+import { useRouter } from "next/navigation";
+
+
+
 const CartPage = () => {
     const { cart, removeFromCart, increaseQuantity, decreaseQuantity, getTotalAmount } = useCart([]);
+
+    const router = useRouter();
 
     const handleProceed = () => {
         // alert("Proceeding to checkout! Total amount: $" + getTotalAmount());
@@ -285,6 +293,7 @@ const CartPage = () => {
                     "Your order has been successfully processed!",
                     "success"
                 );
+                router.push ("/checkout")
                 // Clear the cart after proceeding (optional)
                 setCartItems([]);
             }
@@ -302,12 +311,25 @@ const CartPage = () => {
                 <>
                     <div className="space-y-4">
                         {cart.map((item) => (
-                            <div key={item._id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md">
-                                
-                                <div>
-                                    <p className="text-lg font-semibold">{item.name}</p>
-                                    <p className="text-gray-500">Price: ${item.pricePerDay}</p>
-
+                            <div
+                                key={item._id}
+                                className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md"
+                            >
+                                {/* Thumbnail Image */}
+                                <div className="flex items-center gap-4">
+                                    {item.image && (
+                                    <Image
+                                      src={urlFor(item.image).url()}   // Add a placeholder image path if no image is available
+                                        alt= "image"
+                                        width={60}
+                                        height={60}
+                                        className="rounded-lg border border-gray-300"
+                                    />
+                                    )}
+                                    <div>
+                                        <p className="font-bold">{item.name}</p>
+                                        <p className="text-sm text-gray-500">Price: ${item.pricePerDay} | Day</p>
+                                    </div>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <button
