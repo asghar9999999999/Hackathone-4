@@ -109,7 +109,7 @@ interface CartContextProps {
     getTotalAmount: () => number; // New method for total amount calculation
 }
 
-const CartContext = createContext<CartContextProps | null>(null);
+const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [cart, setCart] = useState<Car[]>([]);
