@@ -15,7 +15,7 @@ const TermsConditionsPage: React.FC = () => {
                     <h2 className="text-blue-600 text-2xl font-semibold mb-4">Booking Policies</h2>
                     <ul className="list-disc list-inside text-gray-700">
                         <li>All bookings are subject to availability.</li>
-                        <li>A valid driver's license is required for rentals.</li>
+                        <li>A valid drivers license is required for rentals.</li>
                         <li>Payments must be made in advance.</li>
                     </ul>
                 </section>

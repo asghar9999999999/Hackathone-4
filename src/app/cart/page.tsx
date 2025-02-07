@@ -268,11 +268,12 @@ import Swal from "sweetalert2";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { useRouter } from "next/navigation";
+import { Car } from "../../../types/car";
 
 
 
 const CartPage = () => {
-    const { cart, removeFromCart, increaseQuantity, decreaseQuantity, getTotalAmount } = useCart([]);
+    const { cart, removeFromCart, increaseQuantity, decreaseQuantity, getTotalAmount } = useCart();
 
     const router = useRouter();
 
@@ -372,10 +373,11 @@ const CartPage = () => {
     };
 
     export default CartPage;
+    
+const setCartItems = (items: Car[]) => {
+    localStorage.setItem("cart", JSON.stringify(items));
+};
 
-    const setCartItems = (items: any[]) => {
-        localStorage.setItem("cart", JSON.stringify(items));
-    };
 
 
 

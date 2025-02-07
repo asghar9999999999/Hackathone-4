@@ -1,4 +1,3 @@
-import type { Car } from "../../types/car"
 import Header from "./homepage/components/header"
 import Hero from "./homepage/components/hero"
 import SearchForm from "./homepage/components/search-form"

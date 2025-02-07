@@ -247,8 +247,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useCart } from "../cart/CartContext";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
@@ -256,7 +254,7 @@ import Link from "next/link";
 import Footer from "../homepage/components/footer";
 import Header from "../homepage/components/header";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 const CheckoutPage = () => {
     const { cart } = useCart([]);
@@ -272,7 +270,7 @@ const CheckoutPage = () => {
         pickupTime: "",
         dropoffTime: "",
     });
-    const [paymentMethod, setPaymentMethod] = useState("card");
+    const [] = useState("card");
     const [isConfirmed, setIsConfirmed] = useState(false);
 
     const handleBillingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -283,9 +281,6 @@ const CheckoutPage = () => {
         setRentalDetails({ ...rentalDetails, [e.target.name]: e.target.value });
     };
 
-    const handlePaymentChange = (method: string) => {
-        setPaymentMethod(method);
-    };
 
     const handleConfirmation = () => {
         setIsConfirmed(!isConfirmed);

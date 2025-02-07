@@ -7,7 +7,7 @@ import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
 import Swal from 'sweetalert2';
 import Header from '../homepage/components/header';
 import Footer from '../homepage/components/footer';
-
+import Image from 'next/image';
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
 interface CheckoutPageProps {
@@ -24,7 +24,11 @@ interface CheckoutPageProps {
     };
 }
 
-const CheckoutForm = ({ amount, bookingDetails }: any) => {
+interface CheckoutFormProps {
+    amount: number;
+}
+
+const CheckoutForm = ({ amount }: CheckoutFormProps) => {
     const stripe = useStripe();
     const elements = useElements();
     const [loading, setLoading] = useState(false);
@@ -88,17 +92,19 @@ const CheckoutPage = ({ amount, bookingDetails }: CheckoutPageProps) => {
             {/* Left Section - Payment Form */}
             <div className="lg:w-3/3 w-full p-4 mb-16">
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <CheckoutForm clientSecret={clientSecret} amount={amount} bookingDetails={bookingDetails} />
+                    <CheckoutForm amount={amount} />
                 </Elements>
             </div>
 
             {/* Right Section - Car Details */}
-            {/* <div className="lg:w-1/3 w-full p-4 bg-gray-100 border rounded-lg shadow-lg">
+            <div className="lg:w-1/3 w-full p-4 bg-gray-100 border rounded-lg shadow-lg">
                 <h2 className="text-xl font-bold mb-4">Booking Details</h2>
                 <div className="flex flex-col items-center">
-                    <img
+                    <Image
                         src={bookingDetails.carImage}
                         alt={bookingDetails.carName}
+                        width={200}
+                        height={100}
                         className="w-32 h-32 object-cover rounded mb-4"
                     />
                     <h3 className="text-lg font-semibold">{bookingDetails.carName}</h3>
@@ -110,7 +116,7 @@ const CheckoutPage = ({ amount, bookingDetails }: CheckoutPageProps) => {
                         Total Price: ${bookingDetails.total}
                     </p>
                 </div>
-            </div> */}
+            </div>
         </div>
     );
 };

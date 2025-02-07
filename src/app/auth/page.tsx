@@ -61,7 +61,7 @@ export default function SignUpLogin() {
                 <p className="mt-4 text-center text-sm text-gray-600">
                     {isLogin ? (
                         <>
-                            Don't have an account?{" "}
+                            Don`&apos;t have an account?{" "}
                             <button
                                 onClick={() => setIsLogin(false)}
                                 className="text-blue-500 hover:underline"

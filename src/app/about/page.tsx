@@ -10,7 +10,7 @@ const AboutPage: React.FC = () => {
                 <section className="bg-white p-6 shadow-lg rounded-lg mb-6">
                     <h2 className="text-blue-600 text-2xl font-semibold mb-4">Welcome to Our Car Rental Service</h2>
                     <p className="text-gray-700">
-                        At <strong>Morent Car Rental</strong>, we pride ourselves on delivering exceptional service and a wide range of vehicles to meet your travel needs. Whether you're looking for a compact car for city drives, an SUV for a family trip, or a luxury car for special occasions, we have you covered.
+                        At <strong>Morent Car Rental</strong>, we pride ourselves on delivering exceptional service and a wide range of vehicles to meet your travel needs. Whether your looking for a compact car for city drives, an SUV for a family trip, or a luxury car for special occasions, we have you covered.
                     </p>
                 </section>
                 <section className="bg-white p-6 shadow-lg rounded-lg mb-6">

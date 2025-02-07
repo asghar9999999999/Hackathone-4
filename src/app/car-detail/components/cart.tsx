@@ -1,13 +1,8 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import { createClient } from "@sanity/client";
-import Image from "next/image";
-import Header from "./Header";
-import { Sidebar } from "./Sidebar";
-import { Star } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import Footer from "./footer";
-import CarDisplay from "./car";
+
 
 const client = createClient({
     projectId: "32dr44ij", // Replace with your Sanity project ID
@@ -19,7 +14,7 @@ const client = createClient({
 
 
 
-const cart = () => {
+const Cart = () => {
     const searchParams = useSearchParams(); // ✅ Ab ye Suspense ke under hai
     const carId = searchParams.get("id");
     interface Car {
@@ -35,66 +30,67 @@ const cart = () => {
         originalPrice: number;
         tags: string[];
         image: string;
-        quantity?: number;
+        quantity: number;
         rating: number;
         slug: { current: string };
         liked: boolean;
     }
 
     const [car, setCar] = useState<Car | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
     const [cart, setCart] = useState<Car[]>([]);
-    const [, setCars] = useState<Car[]>([]); // 🛠 Added missing 'cars' state
 
     // Add Notification
-    const addToCart = (car: Car) => {
-        setCart((prevCart) => [...prevCart, { ...car, quantity: (car.quantity || 1) }]);
-        alert(`${car.name} has been added to your cart!`);
-    };
 
     useEffect(() => {
-        if (carId) {
-            client
-                .fetch(
-                    `*[_type == "car" && _id == $carId][0]{
+        const fetchCarDetails = async () => {
+            try {
+                if (carId) {
+                    const data = await client.fetch(
+                        `*[_type == "car" && _id == $carId][0]{
+                            _id,
+                            name,
+                            brand,
+                            description,
+                            type,
+                            fuelCapacity,
+                            transmission,
+                            seatingCapacity,
+                            pricePerDay,
+                            originalPrice,
+                            tags,
+                            "image": image.asset->url
+                        }`,
+                        { carId }
+                    );
+                    setCart(data);
+                }
+            } catch (error) {
+                console.error("Error fetching car details:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        const fetchAllCars = async () => {
+            try {
+                const data = await client.fetch(
+                    `*[_type == "car"]{
                         _id,
                         name,
                         brand,
-                        description,
-                        type,
-                        fuelCapacity,
-                        transmission,
-                        seatingCapacity,
                         pricePerDay,
-                        originalPrice,
-                        tags,
                         "image": image.asset->url
-                    }`,
-                    { carId }
-                )
-                .then((data) => {
-                    setCar(data);
-                    setLoading(false);
-                })
-                .catch((error) => {
-                    console.error("Error fetching car details:", error);
-                    setLoading(false);
-                });
-        }
+                    }`
+                );
+                setCar(data);
+            } catch (error) {
+                console.error("Error fetching cars:", error);
+            }
+        };
 
-        // Fetch all cars for recommendation
-        client
-            .fetch(
-                `*[_type == "car"]{
-                    _id,
-                    name,
-                    brand,
-                    pricePerDay,
-                    "image": image.asset->url
-                }`
-            )
-            .then((data) => setCars(data))
-            .catch((error) => console.error("Error fetching cars:", error));
+        fetchCarDetails();
+        fetchAllCars();
     }, [carId]);
 
     if (loading) return <p>Loading car details...</p>;
@@ -166,4 +162,4 @@ const cart = () => {
     );
 };
 
-export default cart
+export default Cart
