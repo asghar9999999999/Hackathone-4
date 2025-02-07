@@ -191,14 +191,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 increaseQuantity,
                 decreaseQuantity,
                 getTotalAmount,
+                
             }}
         >
             {children}
         </CartContext.Provider>
     );
-
 };
-export default CartProvider;
 
 
 export const useCart = () => {
@@ -209,3 +208,4 @@ export const useCart = () => {
     return context;
 };
 
+export default CartProvider;
