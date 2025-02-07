@@ -1,3 +1,4 @@
+import { Slug } from "sanity"
 
 export interface Car {
     quantity: number
@@ -17,6 +18,7 @@ export interface Car {
     rating: number
     inventory: number
     slug: {
+        _type: "slug";
         current: string;
     };
 }

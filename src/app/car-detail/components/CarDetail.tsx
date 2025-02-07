@@ -291,6 +291,7 @@ import Footer from "./footer";
 import { useSearchParams } from "next/navigation";
 import CarDisplay from "./car";
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 const client = createClient({
     projectId: "32dr44ij",
@@ -484,8 +485,9 @@ const CarDetail = () => {
             <div className="flex-1">
                 <CarDisplay />
                 <div className="flex justify-center mt-8 mb-8">
-                    <button className="bg-morent-blue text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors">
+                    <button className="bg-morent-blue text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors"> <Link href="/category/components">
                         Show more cars
+                    </Link>
                     </button>
                 </div>
             </div>

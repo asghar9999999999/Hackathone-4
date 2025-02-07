@@ -1,43 +1,96 @@
-"use client";
-import { Search, Settings, Heart, Bell } from "lucide-react";
-import { Avatar } from "@/components/ui/avatar";
-import Image from "next/image";
+"use client"
 import Link from "next/link";
+import { Search, ShoppingCart } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Image from "next/image";
+import { useState } from "react";
 
-export const Header = () => {
+export default function Header() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     return (
-        <header className="bg-white py-4 px-6 flex items-center justify-between border-b">
-            <div className="flex items-center gap-8">
-                <Link href="/" className="text-2xl font-bold text-primary text-morent-blue">MORENT</Link>
-                <div className="relative hidden md:block">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-morent-gray w-5 h-5" />
-                    <input
-                        type="text"
+        <header className="sticky top-0 z-50 w-full border-b bg-background">
+            <div className="container flex h-16 items-center justify-between px-4">
+                <Link href="/" className="text-2xl font-bold text-primary">
+                    MORENT
+                </Link>
+
+                {/* Search */}
+                <div className="hidden md:block relative">
+                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input
+                        type="search"
                         placeholder="Search something here"
-                        className="pl-10 pr-4 py-2 bg-morent-background rounded-lg w-[400px] focus:outline-none focus:ring-2 focus:ring-morent-blue"
+                        className="w-[400px] pl-9 pr-4"
                     />
                 </div>
-            </div>
-            <div className="flex items-center gap-4">
-                <button className="p-2 hover:bg-morent-background rounded-full">
-                    <Heart className="w-6 h-6 text-morent-gray" />
-                </button>
-                <button className="p-2 hover:bg-morent-background rounded-full">
-                    <Bell className="w-6 h-6 text-morent-gray" />
-                </button>
-                <button className="p-2 hover:bg-morent-background rounded-full">
-                    <Settings className="w-6 h-6 text-morent-gray" />
-                </button>
-                <Avatar className="w-10 h-10 ">
-                    <Image
-                        src="/Profil.png?height=2000&width=2000"
-                        alt="Sports car"
-                        width={2000}
-                        height={2000}
 
-                    />               
-                     </Avatar>
+                <div className="hidden md:flex items-center gap-2">
+                    <Link href="/" className="text-sm mr-4">
+                        Home
+                    </Link>
+                    <Link href="/about" className="text-sm mr-3">
+                        About
+                    </Link>
+                    <Link href="/contact" className="text-sm mr-2">
+                        Contact Us
+                    </Link>
+                    <Button variant="ghost" size="icon">
+                        <Link href="/cart">
+                            <ShoppingCart className="h-5 w-5" />
+                        </Link>
+                    </Button>
+                    <Button variant="ghost" size="icon" className="rounded-full">
+                        <Image
+                            src="/Profil.png?height=2000&width=2000"
+                            alt="Profile"
+                            width={32}
+                            height={32}
+                            className="rounded-full"
+                        />
+                    </Button>
+                </div>
+
+                {/* Mobile Menu Button */}
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                    <span className="text-xl">☰</span>
+                </Button>
             </div>
+
+            {/* Mobile Menu */}
+            {isMenuOpen && (
+                <div className="md:hidden bg-background border-t">
+                    <nav className="flex flex-col items-start px-4 py-2">
+                        <Link href="/" className="py-2 text-sm w-full">
+                            Home
+                        </Link>
+                        <Link href="/about" className="py-2 text-sm w-full">
+                            About
+                        </Link>
+                        <Link href="/contact" className="py-2 text-sm w-full">
+                            Contact Us
+                        </Link>
+                        <Link href="/cart" className="py-2 text-sm w-full flex items-center">
+                            <ShoppingCart className="h-4 w-4 mr-2" /> Cart
+                        </Link>
+                        <div className="py-2 w-full">
+                            <Image
+                                src="/Profil.png?height=2000&width=2000"
+                                alt="Profile"
+                                width={32}
+                                height={32}
+                                className="rounded-full mx-auto"
+                            />
+                        </div>
+                    </nav>
+                </div>
+            )}
         </header>
     );
-};
+}

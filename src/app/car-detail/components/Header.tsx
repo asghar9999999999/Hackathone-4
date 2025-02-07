@@ -1,20 +1,13 @@
 "use client"
 import Link from "next/link";
-import { Bell, Heart, Search, Settings, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { useState } from "react";
-import car from "./car";
 
 export default function Header() {
-    const [cartItems, setCartItems] = useState<{ name: string }[]>([]);
-    const [isCartOpen, setIsCartOpen] = useState(false);
-
-    // Function to add item to cart
-    const addToCart = (item: { name: string; }) => {
-        setCartItems((prevItems) => [...prevItems, item]);
-    };
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background">
@@ -32,22 +25,72 @@ export default function Header() {
                         className="w-[400px] pl-9 pr-4"
                     />
                 </div>
-                <div className="flex items-center gap-2">
-                    <Link href= "/cart"> <Button variant="ghost" size="icon"><Heart className="h-5 w-5" /></Button></Link> 
-                    <Button variant="ghost" size="icon"><Bell className="h-5 w-5" /></Button>
-                    <Button variant="ghost" size="icon"><Settings className="h-5 w-5" /></Button>
 
-    
+                <div className="hidden md:flex items-center gap-2">
+                    <Link href="/" className="text-sm mr-4">
+                        Home
+                    </Link>
+                    <Link href="/about" className="text-sm mr-3">
+                        About
+                    </Link>
+                    <Link href="/contact" className="text-sm mr-2">
+                        Contact Us
+                    </Link>
+                    <Button variant="ghost" size="icon">
+                        <Link href="/cart">
+                            <ShoppingCart className="h-5 w-5" />
+                        </Link>
+                    </Button>
                     <Button variant="ghost" size="icon" className="rounded-full">
                         <Image
                             src="/Profil.png?height=2000&width=2000"
-                            alt="Sports car"
-                            width={2000}
-                            height={2000}
+                            alt="Profile"
+                            width={32}
+                            height={32}
+                            className="rounded-full"
                         />
                     </Button>
                 </div>
+
+                {/* Mobile Menu Button */}
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                    <span className="text-xl">☰</span>
+                </Button>
             </div>
+
+            {/* Mobile Menu */}
+            {isMenuOpen && (
+                <div className="md:hidden bg-background border-t">
+                    <nav className="flex flex-col items-start px-4 py-2">
+                        <Link href="/" className="py-2 text-sm w-full">
+                            Home
+                        </Link>
+                        <Link href="/about" className="py-2 text-sm w-full">
+                            About
+                        </Link>
+                        <Link href="/contact" className="py-2 text-sm w-full">
+                            Contact Us
+                        </Link>
+                        <Link href="/cart" className="py-2 text-sm w-full flex items-center">
+                            <ShoppingCart className="h-4 w-4 mr-2" /> Cart
+                        </Link>
+                        <div className="py-2 w-full">
+                            <Image
+                                src="/Profil.png?height=2000&width=2000"
+                                alt="Profile"
+                                width={32}
+                                height={32}
+                                className="rounded-full mx-auto"
+                            />
+                        </div>
+                    </nav>
+                </div>
+            )}
         </header>
     );
 }

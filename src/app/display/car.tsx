@@ -1,5 +1,4 @@
-// Updated CarDisplay component (car.tsx)
-"use client"; // Add this line to mark the component as a client component
+"use client";
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -46,7 +45,7 @@ const CarDisplay: React.FC = () => {
         // Fetch data from Sanity
         client
             .fetch(
-                `*[_type == "car"][4..7]{
+                `*[_type == "car"][1..8]{
           _id,
           name,
           brand,

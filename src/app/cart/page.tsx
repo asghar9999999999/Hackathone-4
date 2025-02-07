@@ -262,7 +262,7 @@
 "use client";
 
 import { useCart } from "./CartContext";
-import { Header } from "../category/components/Header";
+import  Header  from "../category/components/Header";
 import Footer from "../car-detail/components/footer"
 import Swal from "sweetalert2";
 import Image from "next/image";
@@ -299,81 +299,83 @@ const CartPage = () => {
             }
         });
     };
-
-    return (
-        <div>
-            <Header/>
-            <div className="max-w-7xl mx-auto p-4 bg-gray-100 min-h-screen">
-                <h1 className="text-3xl font-bold mb-6 mt-2 ">Your Cart</h1>
-            {cart.length === 0 ? (
-                <p>Your cart is empty!</p>
-            ) : (
-                <>
-                    <div className="space-y-4">
-                        {cart.map((item) => (
-                            <div
-                                key={item._id}
-                                className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md"
-                            >
-                                {/* Thumbnail Image */}
-                                <div className="flex items-center gap-4">
-                                    {item.image && (
-                                    <Image
-                                      src={urlFor(item.image).url()}   // Add a placeholder image path if no image is available
-                                        alt= "image"
-                                        width={60}
-                                        height={60}
-                                        className="rounded-lg border border-gray-300"
-                                    />
-                                    )}
-                                    <div>
-                                        <p className="font-bold">{item.name}</p>
-                                        <p className="text-sm text-gray-500">Price: ${item.pricePerDay} | Day</p>
+        return (
+            <div>
+                <Header />
+                <div className="max-w-7xl mx-auto p-4 bg-gray-100 min-h-screen">
+                    <h1 className="text-3xl font-bold mb-6 mt-2 text-center">Your Cart</h1>
+                    {cart.length === 0 ? (
+                        <p className="text-center">Your cart is empty!</p>
+                    ) : (
+                        <>
+                            <div className="space-y-4">
+                                {cart.map((item) => (
+                                    <div
+                                        key={item._id}
+                                        className="flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded-lg shadow-md"
+                                    >
+                                        {/* Thumbnail Image */}
+                                        <div className="flex items-center gap-4">
+                                            {item.image && (
+                                                <Image
+                                                    src={urlFor(item.image).url()} // Add a placeholder image path if no image is available
+                                                    alt="image"
+                                                    width={60}
+                                                    height={60}
+                                                    className="rounded-lg border border-gray-300"
+                                                />
+                                            )}
+                                            <div>
+                                                <p className="font-bold text-center sm:text-left">{item.name}</p>
+                                                <p className="text-sm text-gray-500 text-center sm:text-left">Price: ${item.pricePerDay} | Day</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-2 mt-4 sm:mt-0">
+                                            <button
+                                                onClick={() => increaseQuantity(item._id)}
+                                                className="bg-black text-white px-2 py-1 rounded"
+                                            >
+                                                +
+                                            </button>
+                                            <span>{item.quantity || 1}</span>
+                                            <button
+                                                onClick={() => decreaseQuantity(item._id)}
+                                                className="bg-green-600 text-white px-2 py-1 rounded"
+                                            >
+                                                -
+                                            </button>
+                                            <button
+                                                onClick={() => removeFromCart(item._id)}
+                                                className="bg-red-600 text-white px-4 py-2 rounded"
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <button
-                                        onClick={() => increaseQuantity(item._id)}
-                                        className="bg-black text-white px-2 py-1 rounded"
-                                    >
-                                        +
-                                    </button>
-                                    <span>{item.quantity || 1}</span>
-                                    <button
-                                        onClick={() => decreaseQuantity(item._id)}
-                                        className="bg-green-600 text-white px-2 py-1 rounded"
-                                    >
-                                        -
-                                    </button>
-                                    <button
-                                        onClick={() => removeFromCart(item._id)}
-                                        className="bg-red-600 text-white px-4 py-2 rounded"
-                                    >
-                                        Remove
-                                    </button>
-                                </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                    <div className="mt-6">
-                        <h2 className="text-xl font-bold">Total: ${getTotalAmount()}</h2>
-                        <button
-                            onClick={handleProceed}
+                            <div className="mt-6 text-center">
+                                <h2 className="text-xl font-bold">Total: ${getTotalAmount()}</h2>
+                                <button
+                                    onClick={handleProceed}
                                     className="mt-4 w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                        >
-                            Proceed to Checkout
-                        </button>
-                    </div>
-                </>
-            )}
-        </div>
-        <Footer/>
-        </div>
-    );
-};
+                                >
+                                    Proceed to Checkout
+                                </button>
+                            </div>
+                        </>
+                    )}
+                </div>
+                <Footer />
+            </div>
+        );
+    };
 
-export default CartPage;
-const setCartItems = (items: any[]) => {
-    localStorage.setItem("cart", JSON.stringify(items));
-};
+    export default CartPage;
+
+    const setCartItems = (items: any[]) => {
+        localStorage.setItem("cart", JSON.stringify(items));
+    };
+
+
 
