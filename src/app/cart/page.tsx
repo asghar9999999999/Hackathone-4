@@ -262,122 +262,102 @@
 "use client";
 
 import { useCart } from "./CartContext";
-import  Header  from "../category/components/Header";
-import Footer from "../car-detail/components/footer"
+import  Header  from "../homepage/components/header";
+import Footer from "../homepage/components/footer";
 import Swal from "sweetalert2";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { useRouter } from "next/navigation";
 import { Car } from "../../../types/car";
-
+import car from "../display/car";
+import Link from "next/link";
 
 
 const CartPage = () => {
-    const { cart, removeFromCart, increaseQuantity, decreaseQuantity, getTotalAmount } = useCart();
+    const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
 
-    const router = useRouter();
+    // Calculate total price
+    const totalPrice = cart.reduce(
+        (total, item) => total + item.pricePerDay * (item.quantity || 1),
+        0
+    );
 
-    const handleProceed = () => {
-        // alert("Proceeding to checkout! Total amount: $" + getTotalAmount());
-        Swal.fire({
-            title: "Processing your order...",
-            text: "Please wait a moment.",
-            icon: "info",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Proceed",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    "Success!",
-                    "Your order has been successfully processed!",
-                    "success"
-                );
-                router.push ("/checkout")
-                // Clear the cart after proceeding (optional)
-                setCartItems([]);
-            }
-        });
-    };
-        return (
-            <div>
-                <Header />
-                <div className="max-w-7xl mx-auto p-4 bg-gray-100 min-h-screen">
-                    <h1 className="text-3xl font-bold mb-6 mt-2 text-center">Your Cart</h1>
-                    {cart.length === 0 ? (
-                        <p className="text-center">Your cart is empty!</p>
-                    ) : (
-                        <>
-                            <div className="space-y-4">
-                                {cart.map((item) => (
-                                    <div
-                                        key={item._id}
-                                        className="flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded-lg shadow-md"
-                                    >
-                                        {/* Thumbnail Image */}
-                                        <div className="flex items-center gap-4">
-                                            {item.image && (
-                                                <Image
-                                                    src={urlFor(item.image).url()} // Add a placeholder image path if no image is available
-                                                    alt="image"
-                                                    width={60}
-                                                    height={60}
-                                                    className="rounded-lg border border-gray-300"
-                                                />
-                                            )}
-                                            <div>
-                                                <p className="font-bold text-center sm:text-left">{item.name}</p>
-                                                <p className="text-sm text-gray-500 text-center sm:text-left">Price: ${item.pricePerDay} | Day</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-2 mt-4 sm:mt-0">
-                                            <button
-                                                onClick={() => increaseQuantity(item._id)}
-                                                className="bg-black text-white px-2 py-1 rounded"
-                                            >
-                                                +
-                                            </button>
-                                            <span>{item.quantity || 1}</span>
-                                            <button
-                                                onClick={() => decreaseQuantity(item._id)}
-                                                className="bg-green-600 text-white px-2 py-1 rounded"
-                                            >
-                                                -
-                                            </button>
-                                            <button
-                                                onClick={() => removeFromCart(item._id)}
-                                                className="bg-red-600 text-white px-4 py-2 rounded"
-                                            >
-                                                Remove
-                                            </button>
-                                        </div>
-                                    </div>
-                                ))}
+    return (
+    <div>
+        <Header />
+        <div className="p-6">
+            <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+            {cart.length === 0 ? (
+                <p>Your cart is empty.</p>
+            ) : (
+                <div className="space-y-4">
+                    {cart.map((item) => (
+                        <div
+                            key={item._id}
+                            className="flex items-center justify-between p-4 border rounded-lg shadow-sm"
+                        >
+                            {/* Thumbnail Image */}
+                            <div className="flex items-center gap-4">
+                                {/* {item.image && urlFor(item.image) && (
+                                    <Image
+                                        src={urlFor(item.image).url()}
+                                        alt={item.name}
+                                        className="w-full h-auto object-cover rounded-lg"
+                                        width={1200}
+                                        height={1000}
+                                    />
+                                )} */}
+
+                                <div>
+                                    <p className="font-bold">{item.name}</p>
+                                    <p className="text-sm text-gray-500">${item.pricePerDay}/day</p>
+                                </div>
                             </div>
-                            <div className="mt-6 text-center">
-                                <h2 className="text-xl font-bold">Total: ${getTotalAmount()}</h2>
+
+                            {/* Quantity Controls */}
+                            <div className="flex items-center gap-2">
                                 <button
-                                    onClick={handleProceed}
-                                    className="mt-4 w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                                    onClick={() => decreaseQuantity(item._id)}
+                                    className="px-2 py-1 bg-red-500 text-white rounded"
                                 >
-                                    Proceed to Checkout
+                                    -
+                                </button>
+                                <span>{item.quantity}</span>
+                                <button
+                                    onClick={() => increaseQuantity(item._id)}
+                                    className="px-2 py-1 bg-green-500 text-white rounded"
+                                >
+                                    +
                                 </button>
                             </div>
-                        </>
-                    )}
-                </div>
-                <Footer />
-            </div>
-        );
-    };
 
-    export default CartPage;
-    
-const setCartItems = (items: Car[]) => {
-    localStorage.setItem("cart", JSON.stringify(items));
+                            {/* Remove Button */}
+                            <button
+                                onClick={() => removeFromCart(item._id)}
+                                className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-red-500 hover:text-white transition"
+                            >
+                                Remove
+                            </button>
+                        </div>
+                    ))}
+
+                    {/* Total Price */}
+                    <div className="text-right">
+                        <p className="text-lg font-bold">
+                            Total: <span className="text-blue-600">${totalPrice.toFixed(2)}</span>
+                        </p>
+                        <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <Link href="/checkout">
+                            Proceed to Checkout
+                                </Link>
+                        </button>
+                    </div>
+                </div>
+            )}
+            <Footer />
+        </div>
+        </div>
+    );
 };
 
-
-
-
+export default CartPage;

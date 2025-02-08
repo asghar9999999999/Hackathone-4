@@ -257,7 +257,7 @@ import Header from "../homepage/components/header";
 // const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 const CheckoutPage = () => {
-    const { cart } = useCart([]);
+    const { cart } = useCart();
     const [billingInfo, setBillingInfo] = useState({
         name: "",
         phone: "",
@@ -607,7 +607,7 @@ const CheckoutPage = () => {
                                     key={item._id}
                                     className="border-b pb-4 last:border-none"
                                 >
-                                    {item.image && (
+                                    {/* {item.image && (
                                         <Image
                                             src={urlFor(item.image).url()}
                                             alt="Car Image"
@@ -615,7 +615,7 @@ const CheckoutPage = () => {
                                             height={800}
                                             className="rounded-lg border border-gray-300 object-cover mx-auto"
                                         />
-                                    )}
+                                    )} */}
                                     <div className="mt-4 text-center">
                                         <h3 className="text-lg font-semibold text-gray-700 mb-2">{item.name}</h3>
                                         <p className="text-gray-600 text-sm mb-1">

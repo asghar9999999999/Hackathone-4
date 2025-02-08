@@ -138,25 +138,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const removeFromCart = (carId: string) => {
         setCart((prevCart) => prevCart.filter((item) => item._id !== carId));
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to undo this action!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, remove it!",
-        }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            "Success!",
-                            "Your order has been successfully processed!",
-                            "success"
-                        );
-                     
-                    }
-                });
-            
     };
 
     const increaseQuantity = (carId: string) => {
@@ -179,7 +160,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const getTotalAmount = () => {
         return cart.reduce((total, item) => total + item.pricePerDay * (item.quantity || 1), 0);
-        
     };
 
     return (
@@ -191,14 +171,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 increaseQuantity,
                 decreaseQuantity,
                 getTotalAmount,
-                
             }}
         >
             {children}
         </CartContext.Provider>
     );
 };
-
 
 export const useCart = () => {
     const context = useContext(CartContext);
@@ -207,5 +185,3 @@ export const useCart = () => {
     }
     return context;
 };
-
-export default CartProvider;

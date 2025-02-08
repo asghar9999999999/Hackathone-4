@@ -1,96 +1,59 @@
-"use client"
-import Link from "next/link";
-import { Search, ShoppingCart } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link"
 
-export default function Header() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+export default function Footer() {
     return (
-        <header className="sticky top-0 z-50 w-full border-b bg-background">
-            <div className="container flex h-16 items-center justify-between px-4">
-                <Link href="/" className="text-2xl font-bold text-primary">
-                    MORENT
-                </Link>
-
-                {/* Search */}
-                <div className="hidden md:block relative">
-                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                        type="search"
-                        placeholder="Search something here"
-                        className="w-[400px] pl-9 pr-4"
-                    />
+        <footer className="border-t bg-background">
+            <div className="container grid gap-8 px-4 py-10 md:grid-cols-4">
+                <div className="space-y-4">
+                    <Link href="/" className="text-2xl font-bold text-primary">
+                        MORENT
+                    </Link>
+                    <p className="text-sm text-muted-foreground">
+                        Our vision is to provide convenience and help increase your sales business.
+                    </p>
                 </div>
-
-                <div className="hidden md:flex items-center gap-2">
-                    <Link href="/" className="text-sm mr-4">
-                        Home
-                    </Link>
-                    <Link href="/about" className="text-sm mr-3">
-                        About
-                    </Link>
-                    <Link href="/contact" className="text-sm mr-2">
-                        Contact Us
-                    </Link>
-                    <Button variant="ghost" size="icon">
-                        <Link href="/cart">
-                            <ShoppingCart className="h-5 w-5" />
-                        </Link>
-                    </Button>
-                    <Button variant="ghost" size="icon" className="rounded-full">
-                        <Image
-                            src="/Profil.png?height=2000&width=2000"
-                            alt="Profile"
-                            width={32}
-                            height={32}
-                            className="rounded-full"
-                        />
-                    </Button>
+                <div>
+                    <h3 className="mb-4 text-sm font-semibold">About</h3>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                        <li><Link href="/Abouts/how-it-works">How it works</Link></li>
+                        <li><Link href="/Abouts/featured">Featured</Link></li>
+                        <li><Link href="/Abouts/partnership">Partnership</Link></li>
+                        <li><Link href="/Abouts/business-relation">Business Relation</Link></li>
+                    </ul>
                 </div>
-
-                {/* Mobile Menu Button */}
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="md:hidden"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                >
-                    <span className="text-xl">☰</span>
-                </Button>
+                <div>
+                    <h3 className="mb-4 text-sm font-semibold">Community</h3>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                        <li><Link href="/Community/events">Events</Link></li>
+                        <li><Link href="/Community/blog">Blog</Link></li>
+                        <li><Link href="/Community/podcast">Podcast</Link></li>
+                        <li><Link href="/Community/invite-a-friend">Invite a friend</Link></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 className="mb-4 text-sm font-semibold">Socials</h3>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                        <li><Link href="https://discord.com/">Discord</Link></li>
+                        <li><Link href="https://instagram.com/">Instagram</Link></li>
+                        <li><Link href="https://twitter.com/">Twitter</Link></li>
+                        <li><Link href="https://facebook.com/">Facebook</Link></li>
+                    </ul>
+                </div>
             </div>
-
-            {/* Mobile Menu */}
-            {isMenuOpen && (
-                <div className="md:hidden bg-background border-t">
-                    <nav className="flex flex-col items-start px-4 py-2">
-                        <Link href="/" className="py-2 text-sm w-full">
-                            Home
+            <div className="border-t">
+                <div className="container flex flex-col items-center justify-between gap-4 px-4 py-6 md:flex-row">
+                    <p className="text-sm text-muted-foreground">©2024 MORENT. All rights reserved</p>
+                    <div className="flex gap-4">
+                        <Link href="/PrivacyPolicy " className="text-sm text-muted-foreground hover:underline">
+                            Privacy & Policy
                         </Link>
-                        <Link href="/about" className="py-2 text-sm w-full">
-                            About
+                        <Link href="/TermsConditions" className="text-sm text-muted-foreground hover:underline">
+                            Terms & Condition
                         </Link>
-                        <Link href="/contact" className="py-2 text-sm w-full">
-                            Contact Us
-                        </Link>
-                        <Link href="/cart" className="py-2 text-sm w-full flex items-center">
-                            <ShoppingCart className="h-4 w-4 mr-2" /> Cart
-                        </Link>
-                        <div className="py-2 w-full">
-                            <Image
-                                src="/Profil.png?height=2000&width=2000"
-                                alt="Profile"
-                                width={32}
-                                height={32}
-                                className="rounded-full mx-auto"
-                            />
-                        </div>
-                    </nav>
+                    </div>
                 </div>
-            )}
-        </header>
-    );
+            </div>
+        </footer>
+    )
 }
+

@@ -7,7 +7,6 @@ import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
 import Swal from 'sweetalert2';
 import Header from '../homepage/components/header';
 import Footer from '../homepage/components/footer';
-import Image from 'next/image';
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
 interface CheckoutPageProps {
@@ -97,7 +96,7 @@ const CheckoutPage = ({ amount, bookingDetails }: CheckoutPageProps) => {
             </div>
 
             {/* Right Section - Car Details */}
-            <div className="lg:w-1/3 w-full p-4 bg-gray-100 border rounded-lg shadow-lg">
+            {/* <div className="lg:w-1/3 w-full p-4 bg-gray-100 border rounded-lg shadow-lg">
                 <h2 className="text-xl font-bold mb-4">Booking Details</h2>
                 <div className="flex flex-col items-center">
                     <Image
@@ -116,7 +115,7 @@ const CheckoutPage = ({ amount, bookingDetails }: CheckoutPageProps) => {
                         Total Price: ${bookingDetails.total}
                     </p>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
@@ -127,7 +126,7 @@ export default function App() {
         rentPerDay: 80,
         days: 5,
         total: 400,
-        carImage: 'https://example.com/car-image.jpg', // Replace with an actual image URL
+        carImage: '', // Replace with an actual image URL
         fuel: 'Petrol',
         seatingCapacity: 4,
         transmission: 'Automatic',

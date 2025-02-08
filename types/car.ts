@@ -1,4 +1,3 @@
-import { Slug } from "sanity"
 
 export interface Car {
     quantity: number
