@@ -69,7 +69,7 @@ const CheckoutForm = ({ amount }: CheckoutFormProps) => {
     );
 };
 
-const CheckoutPage = ({ amount, bookingDetails }: CheckoutPageProps) => {
+const CheckoutPage = ({ amount,  }: CheckoutPageProps) => {
     const [clientSecret, setClientSecret] = useState<string | null>(null);
 
     useEffect(() => {

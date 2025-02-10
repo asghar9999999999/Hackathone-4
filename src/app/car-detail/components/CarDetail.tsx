@@ -502,7 +502,7 @@
 import React, { useEffect, useState } from "react";
 import { createClient } from "@sanity/client";
 import Image from "next/image";
-import { useCart } from "../../cart/CartContext";
+import { useCart } from "../../context/CartContext";
 import Header from "./Header";
 import { Sidebar } from "./Sidebar";
 import Footer from "./footer";

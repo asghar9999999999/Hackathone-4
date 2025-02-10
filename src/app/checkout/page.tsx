@@ -247,9 +247,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useCart } from "../cart/CartContext";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
+import { useCart } from "../context/CartContext";
 import Link from "next/link";
 import Footer from "../homepage/components/footer";
 import Header from "../homepage/components/header";

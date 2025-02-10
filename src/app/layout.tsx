@@ -1,13 +1,14 @@
 import type { Metadata } from "next"
-import { Plus_Jakarta_Sans } from 'next/font/google'
 import "./globals.css"
-const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"] })
-import { CartProvider } from "./cart/CartContext"; // Ensure correct path to CartContext
+import React from "react";
+import { CartProvider } from "./context/CartContext";
 
 export const metadata: Metadata = {
     title: "MORENT - Car Rental",
     description: "The best platform for car rental",
 }
+
+
 
 export default function RootLayout({
     children,
@@ -16,11 +17,11 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={plusJakartaSans.className}>
-                <CartProvider>{children}</CartProvider>
-
-                </body>
+            <body>
+                <CartProvider>
+                    {children}
+                </CartProvider>
+            </body>
         </html>
     )
 }
-

@@ -261,19 +261,13 @@
 // export default Cart;
 "use client";
 
-import { useCart } from "./CartContext";
+import { useCart } from "../context/CartContext";
 import  Header  from "../homepage/components/header";
 import Footer from "../homepage/components/footer";
-import Swal from "sweetalert2";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import { useRouter } from "next/navigation";
-import { Car } from "../../../types/car";
-import car from "../display/car";
 import Link from "next/link";
 
 
-const CartPage = () => {
+export default function CartPage() {
     const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
 
     // Calculate total price
@@ -318,14 +312,14 @@ const CartPage = () => {
                             <div className="flex items-center gap-2">
                                 <button
                                     onClick={() => decreaseQuantity(item._id)}
-                                    className="px-2 py-1 bg-red-500 text-white rounded"
+                                    className="px-2 py-1 bg-red-600 text-white rounded"
                                 >
                                     -
                                 </button>
                                 <span>{item.quantity}</span>
                                 <button
                                     onClick={() => increaseQuantity(item._id)}
-                                    className="px-2 py-1 bg-green-500 text-white rounded"
+                                    className="px-2 py-1 bg-green-600 text-white rounded"
                                 >
                                     +
                                 </button>
@@ -343,10 +337,10 @@ const CartPage = () => {
 
                     {/* Total Price */}
                     <div className="text-right">
-                        <p className="text-lg font-bold">
+                        <p className="text-lg font-bold text-center">
                             Total: <span className="text-blue-600">${totalPrice.toFixed(2)}</span>
                         </p>
-                        <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                        <button className="mt-4 px-6 py-2 mb-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition items-center">
                             <Link href="/checkout">
                             Proceed to Checkout
                                 </Link>
@@ -360,4 +354,3 @@ const CartPage = () => {
     );
 };
 
-export default CartPage;

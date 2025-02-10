@@ -5,9 +5,11 @@ import Footer from "./homepage/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import CarDisplay from "./display/car"
-
+import React from 'react';
+import { CartProvider } from './context/CartContext';
 export default function Home() {
     return (
+        <CartProvider>
         <div className="flex min-h-screen flex-col bg-background">
             <Header />
 
@@ -70,5 +72,6 @@ export default function Home() {
             </main>
             <Footer />
         </div>
+        </CartProvider>
     );
 }

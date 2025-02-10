@@ -1,6 +1,6 @@
 "use client";
 
-import Header  from "./Header";
+import Header  from "../../homepage/components/header";
 import LocationPicker from "./LocationPicker";
 import { Sidebar } from "./Sidebar";
 import Footer from "./footer";
